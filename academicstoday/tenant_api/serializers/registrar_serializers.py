@@ -9,7 +9,7 @@ from shared_foundation import models
 from shared_foundation import utils
 
 
-class RegisterUserSerializer(serializers.Serializer):
+class RegistrarSerializer(serializers.Serializer):
     first_name = serializers.CharField(
         allow_blank=False,
         max_length=64,
@@ -35,7 +35,7 @@ class RegisterUserSerializer(serializers.Serializer):
         max_length=64,
         trim_whitespace=True
     )
-    type_of = serializers.IntegerField(required=False)
+    type_of = serializers.IntegerField()
 
     def validate(self, attrs):
         password = attrs.get('password')
