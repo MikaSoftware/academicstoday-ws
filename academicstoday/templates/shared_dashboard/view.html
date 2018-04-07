@@ -1,5 +1,5 @@
 {% extends 'shared_foundation/shared_private_base.html' %}
-{% load staticfiles i18n humanize %}
+{% load staticfiles i18n humanize foundation_tags %}
 
 {% block title %}
 {% trans 'Dashboard | Over 55' %}
@@ -32,7 +32,7 @@
 
         <h2>List Academies</h2>
         {% for academy in academies.all %}
-            <a href="">{{ academy }}</a>
+            <a href="{% tenant_reverse academy.schema_name 'at_tenant_academy_retrieve' %}">{{ academy }}</a>
         {% endfor %}
 
         {% endif %}

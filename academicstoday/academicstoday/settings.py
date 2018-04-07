@@ -103,6 +103,7 @@ TENANT_APPS = (
     'tenant_api',
     # 'tenant_dashboard',
     'tenant_foundation',
+    'tenant_academy'
     # . . .
 )
 
