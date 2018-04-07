@@ -31,16 +31,7 @@ def user_register_detail_page(request):
 @public_only_or_redirect
 def user_login_redirector_master_page(request):
     if request.user.is_authenticated:
-
-        # CASE 1 OF 2:
-        # First check to see if user belongs to an organization to redirect to.
-        franchise = request.user.franchise
-        if franchise:
-            return HttpResponseRedirect(franchise.reverse('at_tenant_dashboard_master'))
-
-        # CASE 2 OF 2:
-        # Check to see if the authenticated user is a `root` user.
-        #TODO: IMPLEMENT.
+        return HttpResponseRedirect(reverse('at_dashboard_master'))
 
     # If any errors occure in the redirector then simply redirect to the
     # homepage.
@@ -110,7 +101,6 @@ def user_logout_redirector_master_page(request):
     # Step 2: RESET ALL THE USER PROFILE INFORMATION TO A SESSION.
     request.session['me_token'] = None
     request.session['me_token_orig_iat'] = None
-    request.session['me_schema_name'] = None
 
     # Step 3: Close the Django session.
     logout(request)

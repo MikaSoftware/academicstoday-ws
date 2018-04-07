@@ -1,0 +1,36 @@
+{% extends 'shared_foundation/shared_private_base.html' %}
+{% load staticfiles i18n humanize %}
+
+{% block title %}
+{% trans 'Dashboard | Over 55' %}
+{% endblock title %}
+
+{% block header_content %}
+{% endblock header_content %}
+
+{% block content %}
+
+<main id="main" role="main">
+    <h1>Dashboard</h1>
+    <section class="row text-center placeholders">
+
+
+
+    {% comment %}
+    <div class="jumbotron">
+        <h1 class="display-4">Announcements</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+    </div>
+    {% endcomment %}
+
+    <!-- RETURN-TO-TOP -->
+    <a id="return-to-top" href="#" class="btn-info btn-lg back-to-top" role="button" title="Back to top"><i class="fas fa-angle-up fa-2x"></i></a>
+    <!-- end RETURN-TO-TOP -->
+</main>
+
+{% endblock content %}

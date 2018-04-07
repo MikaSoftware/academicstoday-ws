@@ -83,7 +83,6 @@ class LoginAPIView(APIView):
 
         # SAVE ALL THE USER PROFILE INFORMATION TO A SESSION.
         # Step 1 of 2: Save the following variables for permanent storage.
-        request.session['me_schema_name'] = str(authenticated_user.academy.schema_name)
         request.session['me_user_id'] = str(authenticated_user.id)
 
         # Step 2 of 2: Save the following for temporary storage. The key idea is
@@ -95,9 +94,6 @@ class LoginAPIView(APIView):
         # Load tenant.
         #
 
-        # Connection will set it back to our tenant.
-        connection.set_schema(authenticated_user.academy.schema_name, True) # Switch to Tenant.
-
         # Authenticate with the tenant.
         login(self.request, authenticated_user)
 
@@ -106,7 +102,6 @@ class LoginAPIView(APIView):
             data = {
                 'token': str(token),
                 'orig_iat': orig_iat,
-                'schema_name': authenticated_user.academy.schema_name,
                 'email': str(authenticated_user),
             },
             status=status.HTTP_200_OK

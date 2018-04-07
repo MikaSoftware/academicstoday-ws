@@ -14,7 +14,6 @@ class LogoutAPIView(views.APIView):
         # RESET ALL THE USER PROFILE INFORMATION TO A SESSION.
         request.session['me_token'] = None
         request.session['me_token_orig_iat'] = None
-        request.session['me_schema_name'] = None
 
         # Step 2: Close the Django session.
         logout(request)

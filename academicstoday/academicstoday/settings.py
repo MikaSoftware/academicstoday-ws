@@ -89,6 +89,7 @@ SHARED_APPS = (
     'shared_foundation',
     'shared_api',
     'shared_auth',
+    'shared_dashboard',
     # . . .
 )
 
@@ -99,7 +100,7 @@ TENANT_APPS = (
 
     # Tenant-specific apps
     'tenant_api',
-    'tenant_dashboard',
+    # 'tenant_dashboard',
     'tenant_foundation',
     # . . .
 )
