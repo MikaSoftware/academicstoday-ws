@@ -36,6 +36,7 @@ class RegisterUserAPIView(APIView):
         # Attempt to create a user and return status.
         try:
             user = models.SharedUser.objects.create(
+                identifier="0|"+serializer.validated_data['email'], # CUSTOM FORMAT.
                 first_name=serializer.validated_data['first_name'],
                 last_name=serializer.validated_data['last_name'],
                 email=serializer.validated_data['email'],

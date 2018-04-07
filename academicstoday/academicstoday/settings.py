@@ -229,6 +229,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/dev/topics/auth/customizing/
 
 AUTH_USER_MODEL = 'shared_foundation.SharedUser'
+AUTHENTICATION_BACKENDS = ('shared_foundation.backends.AcademicsTodayTenantedEmailBackend',)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/

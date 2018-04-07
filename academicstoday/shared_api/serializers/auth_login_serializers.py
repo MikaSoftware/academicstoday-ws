@@ -14,10 +14,12 @@ from shared_foundation import utils
 class AuthCustomTokenSerializer(serializers.Serializer):
     email_or_username = serializers.CharField(required=True, allow_blank=False)
     password = serializers.CharField(required=True, allow_blank=False)
+    academy = serializers.CharField(required=False, allow_blank=True)
 
     def validate(self, attrs):
         email_or_username = attrs.get('email_or_username', None)
         password = attrs.get('password', None)
+        academy = attrs.get('academy', None)
 
         try:
             user = SharedUser.objects.get(email=email_or_username)
@@ -27,7 +29,7 @@ class AuthCustomTokenSerializer(serializers.Serializer):
         if not user.is_active:
             raise exceptions.ValidationError(_('Your account is suspended!'))
 
-        authenticated_user = authenticate(username=email_or_username, password=password)
+        authenticated_user = authenticate(username=email_or_username, password=password, academy=academy)
 
         if authenticated_user:
             attrs['authenticated_user'] = authenticated_user

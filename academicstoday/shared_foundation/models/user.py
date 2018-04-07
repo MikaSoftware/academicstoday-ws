@@ -49,7 +49,22 @@ class SharedUserManager(BaseUserManager):
 
 
 class SharedUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(_('email address'), unique=True)
+    identifier = models.CharField(
+        _('Identifier'),
+        help_text=_('The unique identifier which has email plus a tenant_id number appended to it. If no tenant_id is append then this user has not been assigned anywhere.'),
+        max_length=127,
+        db_index=True,
+        unique=True
+    )
+    email = models.EmailField(_('email address'), db_index=True)
+    academy = models.ForeignKey(
+        "SharedAcademy",
+        help_text=_('The academy this user belongs to.'),
+        blank=True,
+        null=True,
+        related_name="%(app_label)s_%(class)s_academy_related",
+        on_delete=models.CASCADE
+    )
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
@@ -105,7 +120,12 @@ class SharedUser(AbstractBaseUser, PermissionsMixin):
 
     objects = SharedUserManager()
 
-    USERNAME_FIELD = 'email'
+    # DEVELOPERS NOTE:
+    # WE WILL BE USING "EMAIL" AND "ACADEMY" AS THE UNIQUE PAIR THAT WILL
+    # DETERMINE WHETHER THE AN ACCOUNT EXISTS. WE ARE DOING THIS TO SUPPORT
+    # TENANT SPECIFIC USER ACCOUNTS WHICH DO NOT EXIST ON OTHER TENANTS.
+    # WE USE CUSTOM "AUTHENTICATION BACKEND" TO SUPPORT THE LOGGING IN.
+    USERNAME_FIELD = 'identifier'
     REQUIRED_FIELDS = []
 
     class Meta:
@@ -113,6 +133,7 @@ class SharedUser(AbstractBaseUser, PermissionsMixin):
         db_table = 'at_users'
         verbose_name = _('User')
         verbose_name_plural = _('Users')
+        unique_together = ('email', 'academy',)
 
     def get_full_name(self):
         '''
