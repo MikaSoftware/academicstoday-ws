@@ -78,19 +78,6 @@ class LoginAPIView(APIView):
         print(token)
 
         #
-        # Save session information.
-        #
-
-        # SAVE ALL THE USER PROFILE INFORMATION TO A SESSION.
-        # Step 1 of 2: Save the following variables for permanent storage.
-        request.session['me_user_id'] = str(authenticated_user.id)
-
-        # Step 2 of 2: Save the following for temporary storage. The key idea is
-        #              we want to call these once and then delete them.
-        request.session['me_token'] = str(token)
-        request.session['me_token_orig_iat'] = str(orig_iat)
-
-        #
         # Load tenant.
         #
 

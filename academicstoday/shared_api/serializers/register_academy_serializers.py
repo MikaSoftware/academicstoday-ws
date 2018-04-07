@@ -9,7 +9,7 @@ from shared_foundation import models
 from shared_foundation import utils
 
 
-class RegisterUniversitySerializer(serializers.Serializer):
+class RegisterAcademySerializer(serializers.Serializer):
     schema_name = serializers.CharField(
         allow_blank=False,
         max_length=255,
@@ -29,7 +29,7 @@ class RegisterUniversitySerializer(serializers.Serializer):
     def validate(self, attrs):
         schema_name = attrs.get('schema_name')
 
-        if models.SharedUniversity.objects.filter(schema_name=schema_name).exists():
+        if models.SharedAcademy.objects.filter(schema_name=schema_name).exists():
             raise serializers.ValidationError(_("Schema_name is not unique."))
 
         return attrs

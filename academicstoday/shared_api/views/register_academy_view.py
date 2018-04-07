@@ -1,5 +1,6 @@
 import django_filters
 import django_rq
+from starterkit.drf.permissions import IsAuthenticatedAndIsActivePermission
 from django.conf.urls import url, include
 from django.contrib.auth.models import User, Group
 from django_filters import rest_framework as filters
@@ -11,16 +12,18 @@ from rest_framework import mixins # See: http://www.django-rest-framework.org/ap
 from rest_framework import authentication, viewsets, permissions, status, parsers, renderers
 from rest_framework.decorators import detail_route, list_route # See: http://www.django-rest-framework.org/api-guide/viewsets/#marking-extra-actions-for-routing
 from rest_framework.response import Response
-from shared_api import pagination
 from shared_foundation import models
 from shared_foundation import utils
-from shared_api.serializers.register_university_serializers import RegisterUniversitySerializer
-from shared_university.tasks import found_university_func
+from shared_academy.tasks import create_academy_func
+from shared_api.serializers.register_academy_serializers import RegisterAcademySerializer
 
 
-class RegisterUniversityAPIView(APIView):
+class RegisterAcademyAPIView(APIView):
     throttle_classes = ()
-    permission_classes = ()
+    permission_classes = (
+        permissions.IsAuthenticated,
+        IsAuthenticatedAndIsActivePermission,
+    )
     parser_classes = (
         parsers.FormParser,
         parsers.MultiPartParser,
@@ -31,14 +34,14 @@ class RegisterUniversityAPIView(APIView):
 
     def post(self, request):
         # Perform validation.
-        serializer = RegisterUniversitySerializer(data=request.data)
+        serializer = RegisterAcademySerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         # Attempt to create a user and return status.
         try:
             # Send an email.
             django_rq.enqueue(
-                found_university_func,
+                create_academy_func,
                 {
                     'user_pk': request.user.id,
                     'schema_name': serializer.validated_data['schema_name'],

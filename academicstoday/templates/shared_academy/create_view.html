@@ -1,0 +1,80 @@
+{% extends 'shared_foundation/shared_private_base.html' %}
+{% load staticfiles i18n humanize %}
+
+{% block title %}
+{% trans 'Create Academy | Academics Today WS' %}
+{% endblock title %}
+
+{% block header_content %}
+{% endblock header_content %}
+
+{% block content %}
+
+<!-- JAVASCRIPT -->
+<!----------------------------------------------------------------------------->
+<script>
+    //###################//
+    //    START JS APP   //
+    //###################//
+    $(document).ready(function () {
+        // Do something.
+    }); // end Document Start
+
+    //###################//
+    // JS APP FUNCTIONS  //
+    //###################//
+    /**
+     * Function will take the EMAIL and PASSWORD, submit the information to the
+     * server and have either TRUE/FALSE
+     */
+    function ajax_found_a_university()
+    {
+        // Populate our data.
+        var data = {
+            'schema_name':    $('#id_schema_name').val(),
+            'name':           $('#id_name').val(),
+            'alternate_name': $('#id_alternate_name').val(),
+        }
+
+        // Submit to the server.
+        api_post_register_academy(
+            data,
+            function(json_results) {
+                if (json_results['status'] == 'Registered') {
+                    // Load up our dashboard.
+                    window.location = "{% url 'at_shared_academy_create_done' %}";
+                } else {
+                    alert(json_results['reason']);
+                }
+            },
+            function(xhr, status, error) {
+                alert("Wrong register credentials.");
+                // Convert the error json into string.
+                // var string = JSON.stringify( error );
+                // console.log(string);
+            }
+        ); // End Login
+    }
+</script>
+<!----------------------------------------------------------------------------->
+<!-- end JAVASCRIPT -->
+
+
+<main id="main" role="main">
+    <h1>Create Academy</h1>
+    <section class="row text-center placeholders">
+
+        <form style="width:280px;margin:auto;">
+            <input type="text" placeholder="{% trans 'Schema Name' %}" id="id_schema_name" autocapitalize="off" />
+            <input type="text" placeholder="{% trans 'Official Name' %}" id="id_name" autocapitalize="off" />
+            <input type="text" placeholder="{% trans 'Short Name' %}" id="id_alternate_name" autocapitalize="off" />
+            <input id="id_login_btn" type="button" onclick="ajax_found_a_university();" value="{% trans 'Create University' %}" class="ui-btn ui-corner-all" />
+        </form>
+
+
+    <!-- RETURN-TO-TOP -->
+    <a id="return-to-top" href="#" class="btn-info btn-lg back-to-top" role="button" title="Back to top"><i class="fas fa-angle-up fa-2x"></i></a>
+    <!-- end RETURN-TO-TOP -->
+</main>
+
+{% endblock content %}

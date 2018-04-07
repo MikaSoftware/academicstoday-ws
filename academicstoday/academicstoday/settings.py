@@ -90,6 +90,7 @@ SHARED_APPS = (
     'shared_api',
     'shared_auth',
     'shared_dashboard',
+    'shared_academy'
     # . . .
 )
 

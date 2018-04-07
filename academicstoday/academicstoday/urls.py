@@ -68,6 +68,7 @@ urlpatterns += i18n_patterns(
     url(r'^', include('shared_auth.urls')),
     url(r'^', include('shared_home.urls')),
     url(r'^', include('shared_dashboard.urls')),
+    url(r'^', include('shared_academy.urls')),
 
     # # Tenant specific URLs.
     # url(r'^', include('tenant_api.urls')),

@@ -137,16 +137,16 @@
     /**
      * data - name, alternate_name
      */
-    function api_post_register_university(data, func_callback, func_error_callback)
+    function api_post_register_academy(data, func_callback, func_error_callback)
     {
         // Our URL to the API endpoint.
-        var url = get_shared_domain_url("/api/register/university/?format=json");
+        var url = get_shared_domain_url("/api/register/academy/?format=json");
         var type = "POST"; // Insert.
 
         jQuery.ajax({
             url: url,
             headers: {
-                Authorization: 'Token ' + private_api_key
+                Authorization: rest_api_token
             },
             data: data,
             type: 'POST',
@@ -172,7 +172,7 @@
         jQuery.ajax({
             url: url,
             headers: {
-                Authorization: 'Token ' + private_api_key
+                Authorization: rest_api_token
             },
             data: {
                 'email': email
