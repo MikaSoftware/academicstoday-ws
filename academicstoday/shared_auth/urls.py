@@ -15,6 +15,14 @@ urlpatterns = (
     web_views.user_login_master_page,
     name='at_login_master'),
 
+    url(r'^registration/$',
+    web_views.user_register_master_page,
+    name='at_register_master'),
+
+    url(r'^registration-completed/$',
+    web_views.user_register_detail_page,
+    name='at_register_detail'),
+
     url(r'^login/redirector$',
     web_views.user_login_redirector_master_page,
     name='at_login_redirector'),

@@ -1,6 +1,6 @@
 {% extends 'shared_foundation/shared_base.html' %}
 {% load staticfiles i18n foundation_tags %}
-{% block title %}{% trans 'Login | Over 55 Inc.' %}{% endblock title %}
+{% block title %}{% trans 'Login | Academics Today.' %}{% endblock title %}
 {% block content %}
 <!-- JAVASCRIPT -->
 <script>
@@ -103,6 +103,8 @@
             <input type="button" value="{% trans 'Sign In' %}" class="btn btn-lg btn-primary btn-block" onclick="ajax_login();">
             <h5 class="text-center mt-3 mb-3">
             <a href="{% url 'at_send_reset_password_email_master' %}" class="text-primary plain-link">{% trans 'Forgot Password?' %}</a></h2>
+            <h5 class="text-center mt-3 mb-3">
+            <a href="{% url 'at_register_master' %}" class="text-primary plain-link">{% trans 'Register' %}</a></h2>
          </form>
       </div>
    </div>

@@ -41,7 +41,7 @@ class SharedAcademyListAPIViewWithPublicSchemaTestCase(APITestCase, TenantTestCa
         call_command('init_app', verbosity=0)
 
         # Update the tenant.
-        self.tenant.name='Over 55 (London) Inc.',
+        self.tenant.name='Academics Today',
         self.tenant.alternate_name="Over55",
         self.tenant.description="Located at the Forks of the Thames in ...",
         self.tenant.address_country="CA",

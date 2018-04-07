@@ -22,7 +22,7 @@ urlpatterns = (
     #
     # url(r'^register/done$',
     # web_views.register_user_detail_page,
-    # name='atregister_detail'),
+    # name='at_register_detail'),
     #
     # url(r'^activate/(.*)/$',
     # web_views.user_activation_detail_page,

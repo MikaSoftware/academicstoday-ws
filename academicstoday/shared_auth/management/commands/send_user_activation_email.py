@@ -23,17 +23,15 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         # User Account.
-        parser.add_argument('email_or_username' , nargs='+', type=str)
+        parser.add_argument('email' , nargs='+', type=str)
 
     def handle(self, *args, **options):
-        email_or_username = options['email_or_username'][0]
-
         try:
-            for email_or_username in options['email_or_username']:
-                me = SharedUser.objects.get(email__iexact=email_or_username)
+            for email in options['email']:
+                me = SharedUser.objects.get(email__iexact=email)
                 self.begin_processing(me)
         except SharedUser.DoesNotExist:
-            raise CommandError(_('Account does not exist with the email or username: %s') % str(email_or_username))
+            raise CommandError(_('Account does not exist with the email: %s') % str(email))
 
         # Return success message.
         self.stdout.write(
@@ -52,7 +50,7 @@ class Command(BaseCommand):
             reverse_url_id='at_activate_email',
             resolve_url_args=[pr_access_code]
         )
-        subject = "Welcome to Over 55 Inc!"
+        subject = "Welcome to Academics Today!"
         param = {
             'me': me,
             'url': url,

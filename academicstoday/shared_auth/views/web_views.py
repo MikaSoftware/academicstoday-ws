@@ -20,6 +20,15 @@ def user_login_master_page(request):
 
 
 @public_only_or_redirect
+def user_register_master_page(request):
+    return render(request, 'shared_auth/register_user/master_view.html',{})
+
+@public_only_or_redirect
+def user_register_detail_page(request):
+    return render(request, 'shared_auth/register_user/detail_view.html',{})
+
+
+@public_only_or_redirect
 def user_login_redirector_master_page(request):
     if request.user.is_authenticated:
 
@@ -80,7 +89,8 @@ def user_activation_detail_page(request, pr_access_code=None):
         me = SharedUser.objects.get(pr_access_code=pr_access_code)
         if not me.has_pr_code_expired():
             # Indicate that the account is active.
-            me.was_activated = True
+            me.was_email_activated = True
+            me.is_active = True
             me.save()
         else:
             # Erro message indicating code expired.

@@ -8,12 +8,19 @@ from shared_api.views.auth_send_reset_password_email_views import SendResetPassw
 from shared_api.views.auth_reset_password_views import ResetPasswordAPIView
 from shared_api.views.academy_list_views import SharedAcademyListAPIView
 from shared_api.views.get_is_unique_views import GetIsUniqueAPIView
+from shared_api.views.register_user_view import RegisterUserAPIView
+# from shared_api.views.register_university_view import RegisterUniversityAPIView
 
 
 urlpatterns = [
     #----------------------#
     # Shared API-endpoints #
     #----------------------#
+
+    url(r'^api/register/user/$', RegisterUserAPIView.as_view()),
+
+    # University
+    # url(r'^api/register/university/$', RegisterUniversityAPIView.as_view()),
 
     # Authentication.
     url(r'^api/login$', LoginAPIView.as_view(), name='at_login_api_endpoint'),
