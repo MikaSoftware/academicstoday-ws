@@ -25,6 +25,16 @@ class RegisterAcademySerializer(serializers.Serializer):
         max_length=255,
         trim_whitespace=True
     )
+    activation_callback_url = serializers.URLField(
+        allow_blank=True,
+        max_length=255,
+        trim_whitespace=True
+    )
+    reset_password_callback_url = serializers.URLField(
+        allow_blank=True,
+        max_length=255,
+        trim_whitespace=True
+    )
 
     def validate(self, attrs):
         schema_name = attrs.get('schema_name')

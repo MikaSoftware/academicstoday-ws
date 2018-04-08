@@ -48,6 +48,21 @@ class SharedAcademy(TenantMixin, AbstractSharedThing, AbstractSharedContactPoint
     #  Custom Fields
     #
 
+    activation_callback_url = models.URLField(
+        _("Activation Callback URL"),
+        help_text=_('The URL which will be presented to the user in the activation email.'),
+        null=True,
+        blank=True
+    )
+
+    reset_password_callback_url = models.URLField(
+        _("Reset Password Callback URL"),
+        help_text=_('The URL which will be presented to the user was requested a password reset url in the email.'),
+        null=True,
+        blank=True
+    )
+
+
     #
     #  FUNCTIONS
     #
