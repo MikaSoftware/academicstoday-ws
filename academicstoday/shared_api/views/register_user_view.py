@@ -51,6 +51,10 @@ class RegisterUserAPIView(APIView):
             # Send an email.
             django_rq.enqueue(send_user_activation_email_func, user.email)
 
+            print("---------------------")
+            print("PUBLIC: Created user.")
+            print("---------------------")
+
             # Implemented response.
             return Response({
                 'status': 'Registered',

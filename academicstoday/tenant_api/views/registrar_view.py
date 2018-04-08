@@ -41,7 +41,8 @@ class RegistrarAPIView(APIView):
                 last_name=serializer.validated_data['last_name'],
                 email=serializer.validated_data['email'],
                 is_active=False,
-                was_email_activated=False
+                was_email_activated=False,
+                academy=request.tenant,
             )
 
             # Generate and assign the password.
@@ -51,9 +52,13 @@ class RegistrarAPIView(APIView):
             # Send an email.
             django_rq.enqueue(send_user_activation_email_func, user.email)
 
+            print("---------------------")
+            print("TENANT: Created user.")
+            print("---------------------")
+
             # Implemented response.
             return Response({
-                'status': 'Registrared',
+                'status': 'Registered',
                 'reason': ''
             })
         except Exception as e:

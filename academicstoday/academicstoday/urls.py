@@ -47,7 +47,12 @@ urlpatterns = [
     # url(r'^admin/', admin.site.urls), # Our project does not support Django Admin.
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url('^', include('django.contrib.auth.urls')),
+
+    # Here is where we add endpoints for API endpoints.
+    url(r'^', include('tenant_api.urls')),
     url(r'^', include('shared_api.urls')),
+
+    # Here ...
     url(r'^', include('shared_foundation.urls')),
 
     #  # Sitemap
