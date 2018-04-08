@@ -1,3 +1,4 @@
+{% load foundation_tags %}
 <script>
     // DEVELOPER NOTES:
     // - Requires "common_js.html" to be included before using this code.
@@ -7,7 +8,7 @@
      */
      function api_post_registrar(data, func_callback, func_error_callback)
      {
-         var url = get_shared_domain_url("/api/registrar/?format=json");
+         var url = "{% tenant_reverse tenant.schema_name 'at_tenant_registrar_api_endpoint' %}?format=json";
          var type = "POST"; // Insert.
 
          jQuery.ajax({

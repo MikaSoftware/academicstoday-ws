@@ -30,7 +30,7 @@ class RegistrarAPIView(APIView):
 
     def post(self, request):
         # Perform validation.
-        serializer = RegistrarUserSerializer(data=request.data)
+        serializer = RegistrarSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         # Attempt to create a user and return status.

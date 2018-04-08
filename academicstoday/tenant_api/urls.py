@@ -6,7 +6,7 @@ from tenant_api.views.registrar_view import RegistrarAPIView
 
 
 urlpatterns = [
-    url(r'^api/registrar/$', RegistrarAPIView.as_view()),
+    url(r'^api/registrar/$', RegistrarAPIView.as_view(), name='at_tenant_registrar_api_endpoint'),
 ]
 
 
