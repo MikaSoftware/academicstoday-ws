@@ -43,6 +43,7 @@ class RegistrarAPIView(APIView):
                 is_active=False,
                 was_email_activated=False,
                 academy=request.tenant,
+                type_of=serializer.validated_data['type_of'],
             )
 
             # Generate and assign the password.

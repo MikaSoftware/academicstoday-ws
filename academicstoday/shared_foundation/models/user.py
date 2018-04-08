@@ -147,6 +147,8 @@ class SharedUser(AbstractBaseUser, PermissionsMixin):
         default=True,
         blank=True
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_modified_at = models.DateTimeField(auto_now=True)
 
     #
     # PASSWORD RESET FIELDS

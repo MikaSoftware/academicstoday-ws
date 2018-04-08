@@ -1,0 +1,49 @@
+{% extends 'shared_foundation/shared_private_base.html' %}
+{% load staticfiles i18n humanize foundation_tags %}
+
+{% block title %}
+{% trans 'Dashboard | Over 55' %}
+{% endblock title %}
+
+{% block header_content %}
+{% endblock header_content %}
+
+{% block content %}
+
+
+<h2>Active Client List</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans '#' %}</th>
+                <th>{% trans 'First Name' %}</th>
+                <th>{% trans 'Last Name' %}</th>
+                <th>{% trans 'Phone' %}</th>
+                <th>{% trans 'E-Mail' %}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in student_list %}
+            <tr>
+                <td>{{ customer.id|intcomma }}</td>
+                <td>{% if customer.first_name %}{{ customer.first_name }}{% else %}-{% endif %}</td>
+                <td>{% if customer.last_name %}{{ customer.last_name }}{% else %}-{% endif %}</td>
+                <td>
+                    {% if customer.telephone %}<a href="tel:{{ customer.telephone }}">{{ customer.telephone|pretty_formatted_phonenumber }}</a>{% else %}-{% endif %}
+                </td>
+                <td>{% if customer.owner.email %}<a href="mailto:{{ customer.owner.email }}">{{ customer.owner.email }}</a>{% else %}-{% endif %}</td>
+                <td>
+                    <a href="">{% trans 'View' %}</a>
+                </td>
+            </tr>
+            {% empty %}
+            No customers yet.
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock content %}
