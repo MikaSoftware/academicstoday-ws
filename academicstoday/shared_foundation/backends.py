@@ -12,9 +12,10 @@ class AcademicsTodayTenantedEmailBackend(ModelBackend):
             # Assign the "username" which is our "email" to the identifier object
             # which we will use to lookup.
             identifier = None
-            if kwargs['academy']:
-                identifier = kwargs['academy'] + "|" + username
-            else:
+            if kwargs['academy']: # CASE 1 OF 2: TENANT LOGIN AUTH.
+                academy = kwargs['academy']
+                identifier = str(academy.id) + "|" + username
+            else: # CASE 2 OF 2: SHARED LOGIN AUTH.
                 identifier = "0|" + username
 
             # Lookup our user based on the unique `identifier` field.

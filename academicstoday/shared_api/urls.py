@@ -18,22 +18,22 @@ urlpatterns = [
     #----------------------#
 
     # Registration - User
-    url(r'^api/register/user/$', RegisterUserAPIView.as_view()),
+    url(r'^api/shared/register/user/$', RegisterUserAPIView.as_view()),
 
     # Registration - Academy
-    url(r'^api/register/academy/$', RegisterAcademyAPIView.as_view()),
+    url(r'^api/shared/register/academy/$', RegisterAcademyAPIView.as_view()),
 
     # Authentication.
-    url(r'^api/login$', LoginAPIView.as_view(), name='at_login_api_endpoint'),
-    url(r'^api/logout$', LogoutAPIView.as_view(), name='at_logout_api_endpoint'),
-    url(r'^api/reset-password$', ResetPasswordAPIView.as_view(), name='at_reset_password_api_endpoint'),
-    url(r'^api/send-reset-password-email$', SendResetPasswordEmailAPIView.as_view(), name='at_send_reset_password_email_api_endpoint'),
+    url(r'^api/shared/login$', LoginAPIView.as_view(), name='at_login_api_endpoint'),
+    url(r'^api/shared/logout$', LogoutAPIView.as_view(), name='at_logout_api_endpoint'),
+    url(r'^api/shared/reset-password$', ResetPasswordAPIView.as_view(), name='at_reset_password_api_endpoint'),
+    url(r'^api/shared/send-reset-password-email$', SendResetPasswordEmailAPIView.as_view(), name='at_send_reset_password_email_api_endpoint'),
 
     # Functions.
-    url(r'^api/get_is_unique$', GetIsUniqueAPIView.as_view(), name='at_get_is_unique_api_endpoint'),
+    url(r'^api/shared/get_is_unique$', GetIsUniqueAPIView.as_view(), name='at_get_is_unique_api_endpoint'),
 
     # Application.
-    url(r'^api/academys$', SharedAcademyListAPIView.as_view(), name='at_academy_list_api_endpoint'),
+    url(r'^api/shared/academys$', SharedAcademyListAPIView.as_view(), name='at_academy_list_api_endpoint'),
 
     # JWT
     url(r'^api-token-auth/', obtain_jwt_token),
