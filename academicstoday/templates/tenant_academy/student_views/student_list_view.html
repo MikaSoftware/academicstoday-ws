@@ -2,7 +2,7 @@
 {% load staticfiles i18n humanize foundation_tags %}
 
 {% block title %}
-{% trans 'Dashboard | Over 55' %}
+{% trans 'Dashboard | Academics Today WS' %}
 {% endblock title %}
 
 {% block header_content %}
@@ -25,21 +25,21 @@
             </tr>
         </thead>
         <tbody>
-            {% for customer in student_list %}
+            {% for student in student_list %}
             <tr>
-                <td>{{ customer.id|intcomma }}</td>
-                <td>{% if customer.first_name %}{{ customer.first_name }}{% else %}-{% endif %}</td>
-                <td>{% if customer.last_name %}{{ customer.last_name }}{% else %}-{% endif %}</td>
+                <td>{{ student.id|intcomma }}</td>
+                <td>{% if student.first_name %}{{ student.first_name }}{% else %}-{% endif %}</td>
+                <td>{% if student.last_name %}{{ student.last_name }}{% else %}-{% endif %}</td>
                 <td>
-                    {% if customer.telephone %}<a href="tel:{{ customer.telephone }}">{{ customer.telephone|pretty_formatted_phonenumber }}</a>{% else %}-{% endif %}
+                    {% if student.telephone %}<a href="tel:{{ student.telephone }}">{{ student.telephone|pretty_formatted_phonenumber }}</a>{% else %}-{% endif %}
                 </td>
-                <td>{% if customer.owner.email %}<a href="mailto:{{ customer.owner.email }}">{{ customer.owner.email }}</a>{% else %}-{% endif %}</td>
+                <td>{% if student.owner.email %}<a href="mailto:{{ student.email }}">{{ student.email }}</a>{% else %}-{% endif %}</td>
                 <td>
-                    <a href="">{% trans 'View' %}</a>
+                    <a href="{% url 'at_tenant_academy_student_retrieve' pk=student.pk %}">{% trans 'View' %}</a>
                 </td>
             </tr>
             {% empty %}
-            No customers yet.
+            No students yet.
             {% endfor %}
         </tbody>
     </table>

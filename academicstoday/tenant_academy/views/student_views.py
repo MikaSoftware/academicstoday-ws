@@ -67,3 +67,25 @@ class StudentRetrieveView(DetailView):
 
         # Return our modified context.
         return modified_context
+
+
+
+@method_decorator(login_required, name='dispatch')
+class StudentUpdateView(DetailView):
+    context_object_name = 'customer'
+    model = SharedUser
+    template_name = 'tenant_academy/student_views/student_update_view.html'
+
+    def get_object(self):
+        student = super().get_object()  # Call the superclass
+        return student                  # Return the object
+
+    def get_context_data(self, **kwargs):
+        # Get the context of this class based view.
+        modified_context = super().get_context_data(**kwargs)
+
+        # Required for navigation
+        modified_context['current_page'] = "students"
+
+        # Return our modified context.
+        return modified_context
