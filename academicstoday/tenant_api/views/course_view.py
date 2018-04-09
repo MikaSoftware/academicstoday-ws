@@ -19,7 +19,39 @@ from tenant_api.serializers.course_serializers import (
 from tenant_foundation.models import Course
 
 
-class CourseListCreateAPIView(generics.ListCreateAPIView):
+class CourseCreateAPIView(generics.CreateAPIView):
+    serializer_class = CourseListCreateSerializer
+    # pagination_class = StandardResultsSetPagination
+    permission_classes = (
+        permissions.IsAuthenticated,
+        #TODO: IsOwner Permission
+        # IsAuthenticatedAndIsActivePermission,
+        # CanListCreateCoursePermission
+    )
+    filter_backends = (filters.SearchFilter, DjangoFilterBackend)
+    search_fields = ('title', 'sub_title', 'category_text', 'description',)
+
+    def get_queryset(self):
+        """
+        List
+        """
+        queryset = Course.objects.all().order_by('-created_at')
+        return queryset
+
+    def post(self, request, format=None):
+        """
+        Create
+        """
+        serializer = CourseListCreateSerializer(data=request.data, context={
+            'created_by': request.user,
+            'academy': request.tenant
+        })
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class CourseListAPIView(generics.ListAPIView):
     serializer_class = CourseListCreateSerializer
     # pagination_class = StandardResultsSetPagination
     permission_classes = (
