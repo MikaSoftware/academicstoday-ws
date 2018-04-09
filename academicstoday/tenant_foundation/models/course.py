@@ -25,7 +25,7 @@ class Course(models.Model):
     """
     class Meta:
         app_label = 'tenant_foundation'
-        db_table = 'at_applications'
+        db_table = 'at_courses'
         verbose_name = _('Course')
         verbose_name_plural = _('Courses')
 
@@ -72,6 +72,12 @@ class Course(models.Model):
         default_currency=AT_APP_DEFAULT_MONEY_CURRENCY,
         default=Money(0,AT_APP_DEFAULT_MONEY_CURRENCY),
         blank=True,
+    )
+
+    lectures = models.ManyToManyField(
+        'Lecture',
+        through='LectureOrder',
+        related_name='%(app_label)s_%(class)s_course_related'
     )
 
     # These fields are used to track time/date of this application.
