@@ -19,7 +19,7 @@ django-rq==1.0.1
 django-starterkit==1.0.3
 django-tenants==2.0.0
 django-trapdoor==1.0.8
-djangorestframework==3.8.2
+djangorestframework==3.9.1
 djangorestframework-jwt==1.11.0
 djangorestframework-msgpack==1.0.2
 gunicorn==19.7.1
