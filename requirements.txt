@@ -40,6 +40,6 @@ requests==2.18.4
 rq==0.10.0
 rq-scheduler==0.8.2
 six==1.11.0
-urllib3==1.22
+urllib3==1.26.5
 webencodings==0.5.1
 whitenoise==3.3.1
