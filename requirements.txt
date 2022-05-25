@@ -32,7 +32,7 @@ psycopg2==2.7.4
 psycopg2-binary==2.7.4
 py-moneyed==0.7.0
 pycparser==2.18
-PyJWT==1.6.1
+PyJWT==2.4.0
 python-dateutil==2.7.2
 pytz==2018.3
 redis==2.10.6
